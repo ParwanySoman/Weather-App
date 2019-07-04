@@ -1,34 +1,17 @@
-const Key = "21174c6013efcdebbbf876d2fc562a8d";
+const key = "21174c6013efcdebbbf876d2fc562a8d";
 let input = document.getElementById('inputCity');
-let button = document.getElementById('button');
 
-input.addEventListener('keypress', getValueOfInput);
+input.addEventListener("keypress", function (e) {
+    if (e.keyCode == 13 || e.which == 13) {
+        getWeather();
+    }
+});
 
-function getValueOfInput(e) {
-	console.log(e.target.value);
-}
 
 async function getWeather() {
-    let city = input.value;
-    let api = `http://api.openweathermap.org/data/2.5/weather?q=London&appid=21174c6013efcdebbbf876d2fc562a8d&units=metric`;
-    let response = await axios.get(api);
- 
+   let city = input.value;
+   let api = `http://api.openweathermap.org/data/2.5/forecast?q=${city}&units=metric&mode=json&APPID=${key}`; // hier werd JSON opgeroepen
+   let response = await axios.get(api); // en hier verkrijg je JSONdata 
+
+console.log(response.data.list)
 }
-
-
- getWeather();
-
-//function getWeather() {
-//	{
-///		let city = input.value;
-	//:	let api = `http://api.openweathermap.org/data/2.5/weather?q=London&appid=21174c6013efcdebbbf876d2fc562a8d&units=metric`;
-		
-	//	button.addEventListener('click', async function(e) {
-	//		e.preventDefault();
-	//		let response = await axios.get(api).catch(err => {
-//console.log(response.data.list)
-//		})
-//		})
-	
-//}
-//}
